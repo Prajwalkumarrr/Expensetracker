@@ -1,0 +1,63 @@
+/* src/styles/Navbar.css */
+
+/* Navbar Styles */
+.navbar {
+    background-color: black; /* Black background */
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Make sure navbar is on top */
+    transition: all 0.3s ease;
+  }
+  
+  /* Navbar Container */
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Navbar Title */
+  .navbar-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold; /* Gold color */
+  }
+  
+  /* Navbar links */
+  .navbar-links {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+  }
+  
+  .navbar-links li {
+    margin-left: 20px;
+  }
+  
+  /* Navbar links styles */
+  .navbar-link {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 25px; /* Round buttons */
+    background-color: #333; /* Dark background */
+    transition: all 0.3s ease;
+  }
+  
+  /* Navbar link hover effect */
+  .navbar-link:hover {
+    background-color: gold; /* Gold background */
+    color: black; /* Black text color */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  /* Navbar link active effect */
+  .navbar-link:active {
+    transform: scale(0.98); /* Shrinks on click */
+    transition: transform 0.1s ease-in-out;
+  }
+  

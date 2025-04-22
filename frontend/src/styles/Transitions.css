@@ -1,0 +1,25 @@
+/* src/styles/Transitions.css */
+.content {
+    margin-left: 260px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .content-enter {
+    opacity: 0;
+  }
+  
+  .content-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  
+  .content-exit {
+    opacity: 1;
+  }
+  
+  .content-exit-active {
+    opacity: 0;
+    transition: opacity 500ms ease-in;
+  }
+  
