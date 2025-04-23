@@ -50,6 +50,15 @@ const Sidebar = () => {
                 ➕ Add Expense
               </Link>
             </li>
+            <li>
+              <Link
+                to="/add-income"
+                className={location.pathname === "/add-income" ? "active" : ""}
+                onClick={() => setIsOpen(false)}
+              >
+                💰 Add Income
+              </Link>
+            </li>
            
             <li>
               <button onClick={handleLogout} className="sidebar-link logout-btn">

@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import AddExpense from "./pages/AddExpense";
+import AddIncome from "./pages/AddIncome"; // Added import statement for AddIncome
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Welcome from "./pages/Welcome";
@@ -31,6 +32,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <AddExpense />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/add-income"
+          element={
+            <ProtectedRoute>
+              <AddIncome />
             </ProtectedRoute>
           }
         />

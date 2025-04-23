@@ -141,88 +141,81 @@ const AddExpense = () => {
   };
 
   return (
-    <div className="add-expense-container">
+    <div className="add-expense-page dark-theme" style={{ minHeight: '100vh', width: '100vw', display: 'flex', background: 'linear-gradient(135deg, #181c2f 0%, #232946 100%)' }}>
       <Sidebar />
-      <div className="add-expense-content">
-        <div className="add-expense-form">
-          <h2 className="form-title">{id ? "Edit Expense" : "Add Expense"}</h2>
-
-          {error && <div className="error-message">{error}</div>}
-          {success && <div className="success-message">{success}</div>}
-
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="input-label">Amount (₹)</label>
-              <input
-                type="number"
-                name="amount"
-                value={formData.amount}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter amount"
-                step="1"
-                min="0"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="input-label">Description</label>
-              <input
-                type="text"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="input-field"
-                placeholder="Enter description"
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="input-label">Category</label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                className="select-field"
-                required
+      <div className="form-container" style={{ margin: 'auto', width: '100%', maxWidth: 440, background: 'rgba(30,34,54,0.98)', borderRadius: 18, boxShadow: '0 4px 32px rgba(0,0,0,0.18)', padding: '36px 32px 28px 32px' }}>
+        <div className="add-expense-content dark-theme">
+          <div className="add-expense-form dark-theme">
+            <h2 className="form-title dark-theme">{id ? "Edit Expense" : "Add Expense"}</h2>
+            {error && <div className="error-message dark-theme">{error}</div>}
+            {success && <div className="success-message dark-theme">{success}</div>}
+            <form onSubmit={handleSubmit} className="dark-theme">
+              <div className="form-group dark-theme">
+                <label className="input-label dark-theme">Amount (₹)</label>
+                <input
+                  type="number"
+                  name="amount"
+                  value={formData.amount}
+                  onChange={handleChange}
+                  className="input-field dark-theme"
+                  placeholder="Enter amount"
+                  step="1"
+                  min="0"
+                  required
+                />
+              </div>
+              <div className="form-group dark-theme">
+                <label className="input-label dark-theme">Description</label>
+                <input
+                  type="text"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  className="input-field dark-theme"
+                  placeholder="Enter description"
+                  required
+                />
+              </div>
+              <div className="form-group dark-theme">
+                <label className="input-label dark-theme">Category</label>
+                <select
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  className="select-field dark-theme"
+                  required
+                >
+                  {categories.map((category) => (
+                    <option key={category} value={category}>{category}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group dark-theme">
+                <label className="input-label dark-theme">Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="input-field dark-theme"
+                  required
+                />
+              </div>
+              <button type="submit" className="submit-btn dark-theme" disabled={loading}>
+                {loading ? (id ? "Updating..." : "Adding...") : id ? "Update Expense" : "Add Expense"}
+              </button>
+            </form>
+            {id && (
+              <button
+                type="button"
+                className="delete-btn dark-theme"
+                onClick={handleDelete}
+                disabled={loading}
               >
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label className="input-label">Date</label>
-              <input
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                className="input-field"
-                required
-              />
-            </div>
-
-            <button type="submit" className="submit-btn" disabled={loading}>
-              {loading ? (id ? "Updating..." : "Adding...") : id ? "Update Expense" : "Add Expense"}
-            </button>
-          </form>
-
-          {id && (
-            <button
-              type="button"
-              className="delete-btn"
-              onClick={handleDelete}
-              disabled={loading}
-            >
-              {loading ? "Deleting..." : "Delete Expense"}
-            </button>
-          )}
+                Delete
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

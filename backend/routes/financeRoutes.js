@@ -1,6 +1,7 @@
 import express from "express";
 import { protect } from "../middleware/authMiddleware.js";
 import Expense from "../models/expense.js";
+import Income from "../models/Income.js";
 
 const router = express.Router();
 
@@ -146,6 +147,74 @@ router.delete("/expenses/:id", protect, async (req, res) => {
   } catch (error) {
     console.error("Error deleting expense:", error);
     res.status(500).json({ message: "Error deleting expense" });
+  }
+});
+
+// Add a new income
+router.post("/income/add", protect, async (req, res) => {
+  try {
+    const { amount, source, date, description } = req.body;
+    console.log("Adding income:", { amount, source, date, description });
+    console.log("User ID:", req.user._id);
+
+    // Validate required fields
+    if (!amount || !source) {
+      return res.status(400).json({
+        message: "Missing required fields",
+        received: { amount, source, date, description },
+      });
+    }
+
+    // Validate amount
+    const numAmount = parseFloat(amount);
+    if (isNaN(numAmount) || numAmount <= 0) {
+      return res.status(400).json({
+        message: "Invalid amount. Must be a positive number.",
+        received: amount,
+      });
+    }
+
+    // Create and save the income
+    const income = new Income({
+      user: req.user._id,
+      amount: numAmount,
+      source: source.trim(),
+      date: date ? new Date(date) : new Date(),
+      description: description || "",
+    });
+
+    console.log("Creating income:", income);
+    const savedIncome = await income.save();
+    console.log("Income saved:", savedIncome);
+
+    res.status(201).json(savedIncome);
+  } catch (error) {
+    console.error("Error adding income:", error);
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        message: "Validation error",
+        errors: Object.values(error.errors).map((err) => err.message),
+      });
+    }
+    res.status(500).json({
+      message: "Error adding income",
+      error: error.message,
+    });
+  }
+});
+
+// Fetch all income for the logged-in user
+router.get("/income", protect, async (req, res) => {
+  try {
+    console.log("Fetching income for user:", req.user._id);
+    const income = await Income.find({ user: req.user._id })
+      .sort({ date: -1 })
+      .lean();
+    console.log("Found income:", income.length);
+    res.json(income);
+  } catch (error) {
+    console.error("Error fetching income:", error);
+    res.status(500).json({ message: "Error fetching income" });
   }
 });
 
